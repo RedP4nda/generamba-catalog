@@ -1,0 +1,18 @@
+{% include 'header' %}
+
+import Foundation
+import Swinject
+
+extension Container {
+
+    // Shared container
+    // We are still looking at the best way to achieve this with Swinject
+    static let shared{{ module_info.name }}Container: Container = {
+        let c = Container()
+
+        c.register({{ module_info.name }}Builder.self) { _ in {{ module_info.name }}InjectBuilder()}
+
+        return c
+    }()
+
+}
