@@ -1,0 +1,50 @@
+{% include 'header' %}
+
+import Foundation
+import Swinject
+
+class {{ module_info.name }}InjectBuilder: {{ module_info.name }}Builder {
+
+    func build{{ module_info.name }}Module() -> UIViewController? {
+        registerView()
+        registerInteractor()
+        registerPresenter()
+        registerRouter()
+
+        return Container.sharedContainer.resolve({{ module_info.name }}View.self) as? UIViewController
+    }
+
+    // MARK: Private
+
+    fileprivate func registerView() {
+        let viewDescription = Container.sharedContainer.register({{ module_info.name }}View.self) { _ in {{ module_info.name }}ViewController()}
+        viewDescription.initCompleted { resolver, view in
+            if let view = view as? {{ module_info.name }}ViewController {
+                view.presenter = resolver.resolve({{ module_info.name }}Presenter.self)
+            }
+        }
+
+    }
+
+    fileprivate func registerInteractor() {
+      Container.sharedContainer.register({{ module_info.name }}Interactor.self) { resolver in
+          {{ module_info.name }}DefaultInteractor()
+      }
+    }
+
+    fileprivate func registerPresenter() {
+        Container.sharedContainer.register({{ module_info.name }}Presenter.self) { resolver in
+            {{ module_info.name }}DefaultPresenter(view: resolver.resolve({{ module_info.name }}View.self)!,
+                                            interactor: resolver.resolve({{ module_info.name }}Interactor.self)!,
+                                            router: resolver.resolve({{ module_info.name }}Router.self)!)
+        }
+    }
+
+    fileprivate func registerRouter() {
+        Container.sharedContainer.register({{ module_info.name }}Router.self) { resolver in
+            let viewController = (resolver.resolve({{ module_info.name }}View.self) as? UIViewController)!
+            return {{ module_info.name }}DefaultRouter(viewController: viewController)
+        }
+    }
+
+}

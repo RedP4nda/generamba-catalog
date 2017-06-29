@@ -1,0 +1,34 @@
+# Template information section
+name: "redpanda_swift_bviper"
+summary: "Swift (B)VIPER module template with UIViewController playing as a View and ViewModels to pass in data."
+author: "Florian PETIT"
+version: "1.0.0"
+license: "MIT"
+
+# The declarations for code files
+
+code_files:
+# View layer
+- {name: View/ViewController.swift, path: Code/View/viewcontroller.swift.liquid}
+- {name: View/View.swift, path: Code/View/view.swift.liquid}
+
+# ViewModels layer
+- {name: ViewModels/ViewModel.swift,  path: Code/ViewModels/viewmodel.swift.liquid}
+- {name: ViewModels/ViewModelBuilder.swift, path: Code/ViewModels/viewmodelbuilder.swift.liquid}
+
+# Presenter layer
+- {name: Presenter/Presenter.swift, path: Code/Presenter/presenter.swift.liquid}
+
+# Interactor layer
+- {name: Interactor/Interactor.swift, path: Code/Interactor/interactor.swift.liquid}
+
+# Router layer
+- {name: Router/Router.swift, path: Code/Router/router.swift.liquid}
+
+# Builder
+- {name: Builder/Builder.swift, path: Code/Builder/builder.swift.liquid}
+- {name: Builder/InjectBuilder.swift, path: Code/Builder/injectbuilder.swift.liquid}
+
+# The declarations for test files
+#test_files:
+# TODO: add tests
