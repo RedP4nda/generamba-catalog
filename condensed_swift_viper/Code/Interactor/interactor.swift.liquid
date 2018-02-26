@@ -1,0 +1,15 @@
+{% include 'header' %}
+
+protocol {{ module_info.name }}InteractorInput {
+
+}
+
+protocol {{ module_info.name }}InteractorOutput: class {
+
+}
+
+class {{ module_info.name }}Interactor: {{ module_info.name }}InteractorInput {
+
+    weak var output: {{ module_info.name }}InteractorOutput!
+
+}
